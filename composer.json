@@ -1,0 +1,21 @@
+{
+  "name": "esites/kunstmaan-search-bundle",
+  "description": "Improved kunstmaan search bundle",
+  "type": "symfony-bundle",
+  "authors": [
+    {
+      "name": "Joshwin Zuidema",
+      "email": "jzuidema@e-sites.nl"
+    }
+  ],
+  "license": "proprietary",
+  "require": {
+    "php": ">=7.2",
+    "kunstmaan/bundles-cms": "^5.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Esites\\KunstmaanSearchBundle\\": "src/"
+    }
+  }
+}

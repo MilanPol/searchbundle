@@ -1,0 +1,49 @@
+---
+version: "3.7"
+
+services:
+  project:
+    image: "registry.e-sites.nl/ops/e-containers/sftp:1.2.4-alpine"
+    environment:
+      SFTP_PASSWORD: "kunstmaansearch"
+    ports:
+      - "2331:2222"
+    volumes:
+      - "project:/var/www"
+    networks:
+      internal: null
+
+  php:
+    image: "registry.e-sites.nl/ops/e-containers/php:7.4-alpine"
+    volumes:
+      - "project:/var/www"
+    sysctls:
+      net.core.somaxconn: 1024
+    networks:
+      internal: null
+      external: null
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+
+  kunstmaansearch:
+    image: 'registry.e-sites.nl/ops/e-containers/nginx:1-alpine'
+    environment:
+      DOCUMENT_ROOT: "/var/www/current/public"
+      INDEX_FILE: "index.php"
+    volumes:
+      - "project:/var/www"
+    links:
+      - "php:php"
+    networks:
+      internal: null
+      external: null
+
+networks:
+  internal: null
+  external:
+    name: global-net
+
+volumes:
+  project:

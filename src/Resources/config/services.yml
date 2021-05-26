@@ -1,0 +1,12 @@
+services:
+    kunstmaan_node_search.search.node:
+        public: true
+        class: "%kunstmaan_node_search.search.node.class%"
+        parent: kunstmaan_node_search.search.abstract_elastica_searcher
+        calls:
+            - [ setIndexName, ['%kunstmaan_node_search.indexname%']]
+            - [ setIndexType, ['%kunstmaan_node_search.indextype%']]
+            - [ setTokenStorage, ['@security.token_storage']]
+            - [ setDomainConfiguration, ['@kunstmaan_admin.domain_configuration']]
+            - [ setEntityManager, ['@doctrine.orm.entity_manager']]
+            - [ setConfigValues, ['@service_container']]
