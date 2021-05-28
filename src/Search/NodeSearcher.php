@@ -156,8 +156,6 @@ class NodeSearcher extends BaseNodeSearcher
             $elasticaQueryBool->addShould($elasticaQueryWildcardOnContent);
         }
 
-        $this->applySecurityFilter($elasticaQueryBool);
-
         if ($type !== null) {
             $elasticaQueryType = new Term();
             $elasticaQueryType->setTerm('type', $type);
